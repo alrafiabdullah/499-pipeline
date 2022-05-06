@@ -593,10 +593,13 @@ def train(args, train_dataset, model: PreTrainedModel, tokenizer: PreTrainedToke
                     # tokenizer.save_pretrained(output_dir)
 
                     if hasattr(model, "module"):
-                        torch.save(model.module, os.path.join(
-                            output_dir, "model.pt"))
+                        # print("If saving")
+                        torch.save(model.state_dict(), os.path.join(
+                            output_dir, "pytorch_model.bin"), _use_new_zipfile_serialization=False)
                     else:
-                        torch.save(model, os.path.join(output_dir, "model.pt"))
+                        # print("Else saving")
+                        torch.save(model.state_dict(), os.path.join(
+                            output_dir, "pytorch_model.bin"), _use_new_zipfile_serialization=False)
 
                     # torch.save(args, os.path.join(output_dir, "training_args.bin"))
                     logger.info("Saving model checkpoint to %s", output_dir)
@@ -821,13 +824,13 @@ def main():
     # Other parameters
     parser.add_argument(
         "--eval_data_file",
-        default='/home/abdullah/Downloads/txt-datasets/merged_test-nl.txt',
+        default='/home/abdullah/Code/dl/lt_bert/dataset/texts/merged_valid.txt',
         type=str,
         help="An optional input evaluation data file to evaluate the perplexity on (a text file).",
     )
     parser.add_argument(
         "--line_by_line",
-        default=False,
+        default=True,
         action="store_true",
         help="Whether distinct lines of text in the dataset are to be handled as distinct sequences.",
     )
@@ -836,12 +839,7 @@ def main():
     )
     parser.add_argument(
         "--model_name_or_path",
-
-        # 'bert-base-uncased',
-        # 'google/bert_uncased_L-2_H-128_A-2',
-        default='/home/abdullah/Code/dl/499A/best_models/epoch_3_merged_dataset_tinybert',
-        # 'sagorsarker/bangla-bert-base',
-        # '/home/abdullah/Code/dl/499A/best_models/epoch_3_merged_dataset_tinybert',
+        default='/home/abdullah/Code/dl/lt_bert/best_models/best_tiny_bert_for_pruning',
         type=str,
         help="The model checkpoint for weights initialization. Leave None if you want to train a model from scratch.",
     )
