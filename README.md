@@ -102,6 +102,18 @@ python3 LT_pretrain.py --output_dir folder_name --model_type bert --train_data_f
 
 ##
 
+## WikiANN
+
+| Model         | Eval Accuracy | Pruned Accuracy | Eval F1   | Pruned F1 | Epochs  |
+| ------------- | ------------- | --------------- | --------- | --------- | ------- |
+| **BERT Tiny** | 89.30         | 84.61           | 70.6      | 58.12     | **100** |
+| BERT Bengali  | 97.49         | N/A             | 95.57     | N/A       | N/A     |
+| mBERT-uncased | **97.68**     | N/A             | **97.11** | N/A       | N/A     |
+| XLM-R         | 97.03         | N/A             | 96.22     | N/A       | N/A     |
+| Indic-BERT    | 94.74         | N/A             | 92.66     | N/A       | N/A     |
+
+##
+
 ## Language Model Pruning
 
 | Perplexity | Percentage |
